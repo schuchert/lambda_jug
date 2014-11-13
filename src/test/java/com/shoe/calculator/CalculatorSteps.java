@@ -40,7 +40,6 @@ public class CalculatorSteps {
         try {
             calculator.execute(operatorName);
         } catch (RuntimeException e) {
-            e.printStackTrace();
             lastException = e;
         }
     }
