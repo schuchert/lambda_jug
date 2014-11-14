@@ -50,3 +50,7 @@ Feature: Basic Math
     When the user executes some_unknown_operator
     Then the error should include "Unknown Operator"
 
+  Scenario: Squared
+    Given a user enters 5
+    When the user executes squared
+    Then the result should be 25
