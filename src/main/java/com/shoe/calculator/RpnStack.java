@@ -5,7 +5,7 @@ import java.util.Stack;
 public class RpnStack extends Stack<Integer> {
     @Override
     public Integer peek() {
-        if(size() > 0) {
+        if (size() > 0) {
             return super.peek();
         }
 
@@ -14,7 +14,7 @@ public class RpnStack extends Stack<Integer> {
 
     @Override
     public Integer pop() {
-        if(size() > 0) {
+        if (size() > 0) {
             return super.pop();
         }
 

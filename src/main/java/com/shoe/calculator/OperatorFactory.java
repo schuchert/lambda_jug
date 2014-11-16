@@ -6,9 +6,6 @@ import org.reflections.Reflections;
 import java.beans.Introspector;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
-import java.util.stream.IntStream;
 
 public class OperatorFactory {
     Map<String, RpnOperator> operatorsByName;
@@ -27,16 +24,6 @@ public class OperatorFactory {
             }
         };
 
-        operatorsByName.put("plus", binaryFor((a, b) -> a + b));
-        operatorsByName.put("minus", binaryFor((a, b) -> a - b));
-        operatorsByName.put("times", binaryFor((a, b) -> a * b));
-        operatorsByName.put("divide", binaryFor((a, b) -> a / b));
-        operatorsByName.put("factorial", values -> {
-            int value = values.pop();
-            int result = IntStream.rangeClosed(1, value).reduce(1, (a, b) -> a * b);
-            values.push(result);
-        });
-
         autoRegister();
     }
 
@@ -54,16 +41,6 @@ public class OperatorFactory {
 
     private String nameFor(Class<? extends Registrar> clazz) {
         return Introspector.decapitalize(clazz.getSimpleName());
-    }
-
-
-    RpnOperator binaryFor(BiFunction<Integer, Integer, Integer> op) {
-        return values -> {
-            int rhs = values.pop();
-            int lhs = values.pop();
-            int result = op.apply(lhs, rhs);
-            values.push(result);
-        };
     }
 
     RpnOperator operatorNamed(String operatorName) {
